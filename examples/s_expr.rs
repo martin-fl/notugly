@@ -6,7 +6,7 @@ enum SExpr {
 }
 
 impl Format for SExpr {
-    fn format(&self) -> Formatted {
+    fn format(&self) -> Document {
         match self {
             SExpr::Number(n) => text(format!("{n}")),
             SExpr::Call(name, v) => group_with(
@@ -24,14 +24,14 @@ macro_rules! sexpr {
 }
 
 fn main() {
-    let add_2_3 = sexpr!(add (mul 2 6) (div (mul 4 (mul 3 2 1)) (add 1 (sub 3 (add 1 1)))));
+    let big_eq = sexpr!(add (mul 2 6) (div (mul 4 (mul 3 2 1)) (add 1 (sub 3 (add 1 1)))));
 
     println!(
         "{}\n---\n{}\n---\n{}\n---\n{}\n---\n{}",
-        add_2_3.pretty(80),
-        add_2_3.pretty(60),
-        add_2_3.pretty(40),
-        nest(20, line() & add_2_3.format()).pretty(60),
-        add_2_3.pretty(20)
+        big_eq.pretty(80),
+        big_eq.pretty(60),
+        big_eq.pretty(40),
+        nest(20, line() & big_eq.format()).pretty(60),
+        big_eq.pretty(20)
     );
 }

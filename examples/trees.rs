@@ -5,7 +5,7 @@ enum Tree {
 }
 
 impl Format for Tree {
-    fn format(&self) -> Formatted {
+    fn format(&self) -> Document {
         match self {
             Tree::Node(v, t) => text(v) + bracket(4, "[", spread(t), "]"),
             Tree::Leaf(v) => text(v),
@@ -34,9 +34,4 @@ fn main() {
     );
 
     println!("{}", tree.pretty(45));
-
-    let hello =
-        group(group(group(group(text("hello") / text("a")) / text("b")) / text("c")) / text("d"));
-
-    println!("{}", hello.clone().pretty(9));
 }
