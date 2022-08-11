@@ -6,3 +6,5 @@ authors = ["martin-fl"]
 description = "A simple and generic pretty-printing library"
 readme = "README.md"
 license = "MIT"
+repository = "https://github.com/martin-fl/notugly"
+documentation = "https://docs.rs/notugly/"
