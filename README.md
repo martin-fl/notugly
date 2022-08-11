@@ -6,13 +6,13 @@ Simple and generic pretty-printing library, heavily based on
 
 ## How to use
 
-To define pretty-printing for a type, implement the [Format] trait using the various utility functions:
-- [nil] for a null element
-- [text] to create a string into a document
-- [nest] to indent a document
-- [cat] to concatenate two documents
-- [group] and [group_with] to add the flattened layout as an alternative.
-- [fold], [spread], [stack] and [fill] to collapse a list of documents in various ways
+To define pretty-printing for a type, implement the `Format` trait using the various utility functions:
+- `nil` for a null element
+- `text` to create a string into a document
+- `nest` to indent a document
+- `cat` to concatenate two documents
+- `group` and `group_with` to add the flattened layout as an alternative.
+- `fold`, `spread`, `stack` and `fill` to collapse a list of documents in various ways
 
 
 To make it easier to define a structure, some operators are defined:
@@ -21,11 +21,11 @@ To make it easier to define a structure, some operators are defined:
 - `x / y == x & line() & y`
 - `x * y == x & group(line) & y`
 
-See the `examples/` directory for fully-featured examples.
+See the [examples/](examples) directory for fully-featured examples.
 
 ## Example : S-Expressions
 
-```
+```rust
 use notugly::*;
 
 enum SExpr {
@@ -49,4 +49,4 @@ fn main() {
 
     println!("{}", big_eq.pretty(40));
 }
- ```
+```
