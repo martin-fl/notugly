@@ -1,6 +1,6 @@
 [package]
 name = "notugly"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 authors = ["martin-fl"]
 description = "A simple and generic pretty-printing library"

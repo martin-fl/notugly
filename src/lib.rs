@@ -206,18 +206,22 @@ pub fn stack(xs: &[impl Format]) -> Document {
 /// using a space or a newline between each document
 ///
 /// See page 14 of [A prettier printer](https://homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf).
-pub fn fill(xs: &[Document]) -> Document {
+pub fn fill(xs: &[impl Format]) -> Document {
     match &xs[..] {
         [] => nil(),
-        [x] => x.clone(),
+        [x] => x.format(),
         [x, y, z @ ..] => {
-            let (x, y) = (x.clone(), y.clone());
-            let z1 = [y.flatten()]
+            let x = x.format();
+            let z1 = [y]
                 .iter()
-                .chain(z.iter())
-                .cloned()
+                .map(|y| y.format().flatten())
+                .chain(z.iter().map(Format::format))
                 .collect::<Vec<_>>();
-            let z2 = [y].iter().chain(z.iter()).cloned().collect::<Vec<_>>();
+            let z2 = [y]
+                .iter()
+                .map(|y| y.format())
+                .chain(z.iter().map(Format::format))
+                .collect::<Vec<_>>();
             union(x.flatten() + fill(&z1), x / fill(&z2))
         }
     }
